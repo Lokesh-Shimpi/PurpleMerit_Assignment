@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../api/axios";
 import { useAuth } from "../auth/AuthContext";
+import "../styles/profile.css";
 
 const Profile = () => {
   const { user, login } = useAuth();
@@ -21,11 +22,12 @@ const Profile = () => {
 
     try {
       const res = await api.put("/users/profile", { fullName, email });
-      // refresh auth context
+
       login({
         token: localStorage.getItem("token"),
         user: res.data.user,
       });
+
       setMsg("Profile updated successfully");
     } catch (error) {
       setErr(error.response?.data?.message || "Update failed");
@@ -33,29 +35,31 @@ const Profile = () => {
   };
 
   return (
-    <div style={{ padding: 20, maxWidth: 500 }}>
-      <h2>Edit Profile</h2>
+    <div className="profile-wrapper">
+      <div className="profile-card">
+        <h2>Edit Profile</h2>
 
-      {err && <p style={{ color: "red" }}>{err}</p>}
-      {msg && <p style={{ color: "green" }}>{msg}</p>}
+        {err && <p className="profile-error">{err}</p>}
+        {msg && <p className="profile-success">{msg}</p>}
 
-      <form onSubmit={updateProfile}>
-        <input
-          type="text"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          placeholder="Full Name"
-        />
+        <form onSubmit={updateProfile}>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
 
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <button type="submit">Update Profile</button>
-      </form>
+          <button type="submit">Update Profile</button>
+        </form>
+      </div>
     </div>
   );
 };
