@@ -1,0 +1,62 @@
+.admin-container {
+  padding: 20px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: #f1f5f9;
+}
+
+.status-active {
+  color: green;
+  font-weight: bold;
+}
+
+.status-inactive {
+  color: red;
+  font-weight: bold;
+}
+
+.btn-deactivate {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-activate {
+  background: #16a34a;
+  color: white;
+}
+
+/* Make table scrollable on small screens */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 10px;
+  }
+
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Mobile-friendly buttons */
+@media (max-width: 480px) {
+  .btn-activate,
+  .btn-deactivate {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
